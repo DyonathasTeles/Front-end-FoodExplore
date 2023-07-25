@@ -1,9 +1,9 @@
-import Container from "./style"
+import {Container} from "./style"
 
-export function Button() {
+export function Button({name, ...rest}) {
   return (
-    <Container>
-
+    <Container type="button" {...rest}>
+      {name}
     </Container>
   )
 }
