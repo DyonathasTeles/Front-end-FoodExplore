@@ -27,8 +27,11 @@ export const Container = styled.div`
     }
 
     >main {
+      width: 100%;
+
+      
       margin-top: 7.3rem;
-  
+
       .inputs{
         display: flex;
         flex-direction: column;
@@ -39,6 +42,29 @@ export const Container = styled.div`
         p{
           font-family: "Roboto", sans-serif;
           margin-bottom: .8rem;
+        }
+
+      }
+
+      .link{
+
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+
+       margin-top: 3.2rem;
+
+        a{
+          font-family:" Poppins",sans-serif;
+          font-size: 1.4rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 2.4rem;
+  
+          margin: auto;
+  
+          color: ${({ theme }) => theme.COLORS.LIGHT_100};
         }
       }
   

@@ -33,6 +33,10 @@ export function SignIn() {
         
         <Button name="Sign In" />
 
+        <div className="link">
+        <a href="#">Create an account</a>
+        </div>
+
       </main>
 
       </div>  
