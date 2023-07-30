@@ -2,9 +2,9 @@ import { Container } from "./style"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import logo from "../../assets/logo.svg" 
-import { FiMail, FiLock } from "react-icons/fi"
+import { FiMail, FiLock, FiUser } from "react-icons/fi"
 
-export function SignIn() {
+export function SignUp() {
   return (
     <Container>
         <div className="content">
@@ -19,6 +19,11 @@ export function SignIn() {
 
         <div className=" inputs">
 
+          <div className="user">
+          <p>Your name</p>
+          <Input id="user" type="text" placeholder="Example: Dyonathas Teles"   />
+          </div>
+
           <div className="email">
           <p>Email</p>
           <Input id="email" type="email" placeholder="Example: example@example.com.br" />
@@ -26,7 +31,7 @@ export function SignIn() {
 
           <div className="password">
           <p>Password</p>
-          <Input  type="password" id="password" placeholder="At least 6 characters" />
+          <Input id="password" type="password"  placeholder="At least 6 characters"   />
           </div>
     
         </div>
@@ -34,7 +39,7 @@ export function SignIn() {
         <Button name="Sign In" />
 
         <div className="link">
-        <a href="#">Create an account</a>
+        <a href="#">I already have an account</a>
         </div>
 
       </main>

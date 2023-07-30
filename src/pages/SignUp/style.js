@@ -40,6 +40,8 @@ export const Container = styled.div`
 
         p{
           font-family: "Roboto", sans-serif;
+          font-weight: 400;
+          font-size: 1.6rem;
           margin-bottom: .8rem;
           color: ${({ theme }) => theme.COLORS.LIGHT_400};
         }
@@ -103,7 +105,7 @@ export const Container = styled.div`
   }
 
   main {
-    max-height: 541px;
+    max-height: 621px;
     max-width: 476px;
     padding: 6rem;
 

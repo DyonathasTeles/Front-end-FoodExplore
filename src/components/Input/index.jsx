@@ -1,6 +1,6 @@
 import { Container } from "./style"
 
-export function Input({ico: Icon, id, ...rest}) {
+export function Input({icon: Icon, id, ...rest}) {
   return(
     <Container>
       <div className="content">
