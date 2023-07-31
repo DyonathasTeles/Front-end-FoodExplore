@@ -4,8 +4,18 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
 
+  display: grid;
+  grid-template-rows: 11.4rem auto 7.7rem;
+  grid-template-areas: 
+  "Header"
+  "Main"
+  "Footer"
+  ;
+
   .header {
-    
+
+    grid-area: Header;
+
     padding: 6.4rem 2.8rem 3.2rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
@@ -29,9 +39,9 @@ export const Production = styled.div`
   width: 100%;
   padding: 3.6rem 2.8rem 1.4rem;
 
-  main {
-    height: 67rem;
+  grid-area: Main;
 
+  main {
 
     button {
       width: 100%;

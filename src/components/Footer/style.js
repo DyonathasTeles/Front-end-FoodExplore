@@ -7,6 +7,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-around ;
 
+  grid-area: Footer;
+
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
   
   .logo {
