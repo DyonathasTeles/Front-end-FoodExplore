@@ -4,13 +4,13 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './style/GlobalStyle'
 import theme from "./style/theme"
 
-import { Dish } from './pages/Dish'
+import { NewDish } from './pages/NewDish'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
     <GlobalStyle/>
-    <Dish/>
+    <NewDish/>
     </ThemeProvider>
   </React.StrictMode>,
 )

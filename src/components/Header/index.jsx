@@ -3,7 +3,7 @@ import receipt from "../../assets/receipt.svg"
 import frame from "../../assets/frame.svg"
 import logo from "../../assets/logo.svg" 
 
-export function Header() {
+export function Header({admin=true, ...rest}) {
   return (
     <Container>
 
@@ -11,12 +11,28 @@ export function Header() {
           <img src={frame} alt="frame" />
       </button>
 
-      <div className="logo">
+      
+        { admin ?  
+        
+        <div className="logo">
          <img src={logo} alt="logo" />
          <h1>Food Explorer</h1>
-      </div>
 
-      <button className="receipt"> <img src={receipt} alt="receipt" /> </button>
+         <div className="adm">
+          <span>admin</span>
+
+         </div>
+
+         </div> : 
+      
+         <div className="logo">
+
+         <img src={logo} alt="logo" />
+         <h1>Food Explorer</h1>
+         </div>
+         }
+
+        { admin ? '' :  <button className="receipt"> <img src={receipt} alt="receipt" /> </button>}
 
     </Container>
   )

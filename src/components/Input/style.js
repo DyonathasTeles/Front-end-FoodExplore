@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   >.content {
     height: 48px;
-    background-color: ${({theme}) => theme.COLORS.DARK_900};
+    background-color: ${({theme , $cor}) => $cor ? theme.COLORS.DARK_800 : theme.COLORS.DARK_900};
     border-radius: 0.8rem;
 
     padding: 1.2rem 1.4rem;

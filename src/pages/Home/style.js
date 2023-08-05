@@ -79,6 +79,7 @@ export const Content = styled.div`
 
     .cards {
       display: flex;
+      overflow-x: scroll;
       gap: 1.6rem;
 
       padding-left: 2.4rem;
