@@ -1,8 +1,8 @@
 import { Container } from "./style"
 
-export function IncludeButton({name, loading=false, icon: Icon, ...rest}) {
+export function IncludeButton({name, loading=false, icon: Icon, dark,...rest}) {
   return (
-  <Container type="button" disabled={loading} {...rest} > 
+  <Container type="button" disabled={loading} {...rest} $dark={dark} > 
     {Icon && <Icon size={20} />}
     {name}
   </Container>

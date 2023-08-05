@@ -13,7 +13,7 @@ export const Container = styled.button`
   border: none;
   border-radius: .5rem;
   
-  background-color: ${({ theme }) => theme.COLORS.RED_100};
+  background-color: ${({ theme, $dark }) => $dark ? theme.COLORS.DARK_800 : theme.COLORS.RED_100};
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
   font-family: "Poppins", sans-serif;

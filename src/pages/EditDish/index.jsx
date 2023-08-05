@@ -9,7 +9,7 @@ import { Input } from "../../components/Input"
 import back from "../../assets/back.svg"
 import { TagColor } from "../../components/TagColor"
 
-export function NewDish() {
+export function EditDish() {
   return (
     <Container>
       <Header/>
@@ -20,7 +20,7 @@ export function NewDish() {
           <button><img src={back} alt="" /> Back </button>
           </div>
 
-          <h1>New Dish</h1>
+          <h1>Edit Dish</h1>
           
           <div className="img-dish">
           <p>Dish image</p>
@@ -61,8 +61,10 @@ export function NewDish() {
             <p>Description</p>
             <Textarea placeholder="Briefly talk about the dish, its ingredients and composition" />
           </div>
-
+          <div className="buttons">
+          <IncludeButton dark name="Delete dish" />
           <IncludeButton name="Save editions" />
+          </div>
 
         </Form>
       </Content>
