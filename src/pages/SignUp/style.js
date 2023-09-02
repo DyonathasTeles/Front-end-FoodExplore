@@ -5,12 +5,15 @@ export const Container = styled.div`
   height: 100vh;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
+`
 
-  >.content {
-    max-width: 438px;
+export const Content = styled.div`
+    max-width: 428px;
     height: 100vh;
     margin: auto;
-    padding: 15.8rem 4.7rem 15.8rem 6.5rem ;
+    padding: 9rem 3rem 5rem 5rem;
+
+    animation: toAppear 600ms ;
 
     >.logo {
       display: flex;
@@ -27,8 +30,9 @@ export const Container = styled.div`
 
     >main {
       width: 100%;
+      max-width: 31.6rem;
 
-      
+      margin-inline: auto;
       margin-top: 7.3rem;
 
       .inputs{
@@ -76,20 +80,26 @@ export const Container = styled.div`
 
     }
     
-  }
-  
-  @media (max-width: 399px) {
+    @keyframes toAppear {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
 
-    >.content {
-      padding: 7rem 4rem 5rem 3rem;
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
+  
+  @media (min-width: 428px) {
+      
+      padding: 15rem 4.7rem 15.8rem 6.5rem ;
   }
 
   @media (min-width: 870px) {
-
->.content {
   max-width: 100%;
-  padding: 1rem;
+  padding: 3rem;
   gap: 2rem;
   display: flex;
   align-items: center;
@@ -98,6 +108,7 @@ export const Container = styled.div`
 
   .logo {
     white-space: nowrap;
+    gap: 1.9rem;
 
     h1 {
       font-size: 4.2rem;
@@ -107,7 +118,7 @@ export const Container = styled.div`
   main {
     max-height: 621px;
     max-width: 476px;
-    padding: 6rem;
+    padding: 6.4rem;
 
     background: ${({ theme }) => theme.COLORS.DARK_700}; 
     margin: 0;
@@ -133,6 +144,6 @@ export const Container = styled.div`
     }
   }
 }
-}
-  
+
+
 `

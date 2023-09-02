@@ -1,7 +1,6 @@
 import { Container, Content } from "./style"
-
-import { IncludeButton } from "../../components/IncludeButton"
 import { Header } from "../../components/Header"
+import { Button } from "../../components/Button"
 import { Footer } from "../../components/Footer"
 import { Amount } from "../../components/Amount"
 import { Tag } from "../../components/Tag"
@@ -11,9 +10,13 @@ import back from "../../assets/back.svg"
 import dish from "../../assets/Mask group-2.png"
 
 export function Dish() {
+  
+
   return (
     <Container>
-      <Header/>
+
+      <Header className="mobile" />
+
       <Content>
         <button className="back"> <img src={back} alt="back to previous pages" /> Back</button>
 
@@ -22,6 +25,8 @@ export function Dish() {
           <div className="img-dish">
             <img src={dish} alt="" />
           </div>
+
+          <div className="information">
 
           <div className="details">
             <h2>Salad Ravanello</h2>
@@ -41,8 +46,12 @@ export function Dish() {
           <div className="purchase-amount">
               <Amount/>
 
-              <IncludeButton name="order ∙ R$ 25,00" icon={PiReceiptBold} loading/>
+              {window.innerWidth > 820 ? <Button className="ButtonOrder" name="include ∙ R$ 25,00" loading/> : <Button className="ButtonOrder" name="order ∙ R$ 25,00" icon={PiReceiptBold} loading/>}
+
           </div>
+          
+          </div>
+
         
         </div>
 

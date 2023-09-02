@@ -1,9 +1,10 @@
-import {Container} from "./style"
+import { Container } from "./style"
 
-export function Button({name, ...rest}) {
+export function Button({name, loading=false, icon: Icon, dark,...rest}) {
   return (
-    <Container type="button" {...rest}>
-      {name}
-    </Container>
+  <Container type="button" disabled={loading} {...rest} $dark={dark} > 
+    {Icon && <Icon size={20} />}
+    {name}
+  </Container>
   )
 }

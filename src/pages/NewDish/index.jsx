@@ -1,7 +1,7 @@
 import { Container, Content, Form } from "./style"
 import { InputImg } from "../../components/InputImg"
 import { Textarea } from "../../components/Textarea"
-import { IncludeButton } from "../../components/IncludeButton"
+import { Button } from "../../components/Button"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Input } from "../../components/Input"
@@ -62,7 +62,7 @@ export function NewDish() {
             <Textarea placeholder="Briefly talk about the dish, its ingredients and composition" />
           </div>
 
-          <IncludeButton name="Save editions" />
+          <Button name="Save editions" />
 
         </Form>
       </Content>

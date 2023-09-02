@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   width: 100%;
-  
+  max-width: 900px;
   
   :focus-within {
     border: 1px solid ${({theme}) => theme.COLORS.LIGHT_300};
@@ -54,4 +54,25 @@ export const Container = styled.div`
 
     
   }
+
+  @media (min-width: 1110px) {
+
+    .content{
+      justify-content: center;
+      label{
+        margin-left: 20%;
+      }
+    }
+  }
+
+  @media (min-width: 1368px) {
+
+  .content{
+    justify-content: center;
+    label{
+      margin-left: 30%;
+    }
+  }
+  }
+
 `

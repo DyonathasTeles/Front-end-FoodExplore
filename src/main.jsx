@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
-import GlobalStyle from './style/GlobalStyle'
 import theme from "./style/theme"
+import GlobalStyle from './style/GlobalStyle'
 
-import { EditDish } from './pages/EditDish'
+import { Home } from './pages/Home'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
     <GlobalStyle/>
-    <EditDish/>
+    <Home/>
     </ThemeProvider>
   </React.StrictMode>,
 )

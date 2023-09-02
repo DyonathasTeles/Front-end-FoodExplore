@@ -1,13 +1,13 @@
-import { Container } from "./style" 
+import { Container, Content } from "./style" 
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
+
 import logo from "../../assets/logo.svg" 
-import { FiMail, FiLock, FiUser } from "react-icons/fi"
 
 export function SignUp() {
   return (
     <Container>
-        <div className="content">
+      <Content>
 
       <div className="logo">
         <img src={logo} alt="logo " />
@@ -44,7 +44,7 @@ export function SignUp() {
 
       </main>
 
-      </div>  
+      </Content>  
     </Container>
   )
 }

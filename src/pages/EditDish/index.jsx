@@ -1,7 +1,7 @@
 import { Container, Content, Form } from "./style"
 import { InputImg } from "../../components/InputImg"
 import { Textarea } from "../../components/Textarea"
-import { IncludeButton } from "../../components/IncludeButton"
+import { Button } from "../../components/Button"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Input } from "../../components/Input"
@@ -61,9 +61,10 @@ export function EditDish() {
             <p>Description</p>
             <Textarea placeholder="Briefly talk about the dish, its ingredients and composition" />
           </div>
+          
           <div className="buttons">
-          <IncludeButton dark name="Delete dish" />
-          <IncludeButton name="Save editions" />
+          <Button dark name="Delete dish" />
+          <Button name="Save editions" />
           </div>
 
         </Form>

@@ -1,13 +1,14 @@
-import { Container } from "./style" 
+import { Container, Content } from "./style" 
+import { ButtonText } from "../../components/ButtonText"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
+
 import logo from "../../assets/logo.svg" 
-import { FiMail, FiLock } from "react-icons/fi"
 
 export function SignIn() {
   return (
     <Container>
-        <div className="content">
+      <Content>
 
       <div className="logo">
         <img src={logo} alt="logo " />
@@ -31,15 +32,15 @@ export function SignIn() {
     
         </div>
         
-        <Button name="Sign In" />
+        <Button name="Sign In"/>
 
-        <div className="link">
-        <a href="#">Create an account</a>
+        <div className="return">
+        <ButtonText name="I already have an account" />
         </div>
 
       </main>
 
-      </div>  
+      </Content>  
     </Container>
   )
 }

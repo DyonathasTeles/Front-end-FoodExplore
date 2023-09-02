@@ -5,12 +5,15 @@ export const Container = styled.div`
   height: 100vh;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
+`
 
-  >.content {
-    max-width: 438px;
+export const Content = styled.div`
+    max-width: 428px;
     height: 100vh;
     margin: auto;
-    padding: 15.8rem 4.7rem 15.8rem 6.5rem ;
+    padding: 10rem 3rem 5rem 4rem;
+
+    animation: toAppear 1s ;
 
     >.logo {
       display: flex;
@@ -27,8 +30,9 @@ export const Container = styled.div`
 
     >main {
       width: 100%;
-
+      max-width: 31.6rem;
       
+      margin-inline: auto;
       margin-top: 7.3rem;
 
       .inputs{
@@ -46,20 +50,11 @@ export const Container = styled.div`
 
       }
 
-      .link{
-
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: center;
-
+      .return{
        margin-top: 3.2rem;
 
-        a{
-          font-family:" Poppins",sans-serif;
+        button{
           font-size: 1.4rem;
-          font-style: normal;
-          font-weight: 500;
           line-height: 2.4rem;
   
           margin: auto;
@@ -74,18 +69,23 @@ export const Container = styled.div`
 
     }
     
-  }
-  
-  @media (max-width: 399px) {
+    @keyframes toAppear {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
 
-    >.content {
-      padding: 7rem 4rem 5rem 3rem;
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
+  
+  @media (min-width: 428px) {
+      padding: 15.8rem 4.7rem 15.8rem 6.5rem;
   }
 
   @media (min-width: 870px) {
-
->.content {
   max-width: 100%;
   padding: 1rem;
   gap: 2rem;
@@ -131,6 +131,5 @@ export const Container = styled.div`
     }
   }
 }
-}
-  
+
 `

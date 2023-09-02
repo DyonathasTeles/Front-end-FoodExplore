@@ -4,6 +4,9 @@ import { Footer } from "../../components/Footer"
 import { Card } from "../../components/Card"
 import fruit from "../../assets/pngegg2.png"
 
+
+
+
 export function Home() {
   return (
     <Container> 
@@ -26,29 +29,18 @@ export function Home() {
         <div className="Meals section">
             <h2>Meals</h2>
 
-            <div className="cards">
-            <Card/>
-            <Card/>
-            </div>
         </div>
 
         <div className="Main-dishes section">
             <h2>Main dishes</h2>
 
             <div className="cards">
-            <Card/>
-            <Card/>
+              <Card/>
             </div>
         </div>
 
         <div className="Drinks section">
             <h2>Drinks</h2>
-
-            <div className="cards">
-            <Card/>
-            <Card/>
-            </div>
-
         </div>
       </Content>
 

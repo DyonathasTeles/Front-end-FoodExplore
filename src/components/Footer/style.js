@@ -38,4 +38,9 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.LIGHT_200};
     }
   }
+
+  @media (min-width: 824px) {
+    justify-content: space-between ;
+    padding: 2.4rem 12.3rem;
+  }
 `

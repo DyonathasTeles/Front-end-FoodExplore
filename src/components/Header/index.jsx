@@ -1,26 +1,43 @@
 import { Container } from "./style";
-import receipt from "../../assets/receipt.svg"
-import frame from "../../assets/frame.svg"
+
+import { ButtonRequest } from "../ButtonRequest";
+import { Input } from "../../components/Input"
+import { Button } from "../Button";
+import { Sidebar } from "../Sidebar";
+
+import {FiSearch, FiMenu} from "react-icons/fi"
+import { PiReceiptBold } from "react-icons/pi"
+import {GoSignOut} from "react-icons/go"
+
 import logo from "../../assets/logo.svg" 
+import { useState } from "react";
 
-export function Header({admin=true, ...rest}) {
+export function Header({admin=false, ...rest}) {
+  const [sidebar, setSidebar] = useState(false)
+
+  function showSidebar() {
+    return setSidebar(!sidebar)
+  }
+
   return (
-    <Container>
+    <Container $admin={admin} {...rest}>
 
-      <button className="frame">
-          <img src={frame} alt="frame" />
-      </button>
+      <div className="Mobile ">
+
+      <div className="frame">
+          <FiMenu onClick={showSidebar} />
+          {sidebar && <Sidebar admin={true} active={setSidebar} />}
+      </div>
 
       
         { admin ?  
-        
+          
         <div className="logo">
          <img src={logo} alt="logo" />
          <h1>Food Explorer</h1>
 
          <div className="adm">
           <span>admin</span>
-
          </div>
 
          </div> : 
@@ -32,7 +49,43 @@ export function Header({admin=true, ...rest}) {
          </div>
          }
 
-        { admin ? '' :  <button className="receipt"> <img src={receipt} alt="receipt" /> </button>}
+        { admin ? '' :  
+        
+        <button className="receipt"> 
+         <PiReceiptBold/>
+         <div className="orderNumbers"> 12 </div>
+         </button>}
+
+      </div>
+
+      <div className="Desktop">
+
+      { admin ?  
+        
+        <div className="logo">
+         <img src={logo} alt="logo" />
+         <h1>Food Explorer</h1>
+
+         <div className="adm">
+          <span>admin</span>
+         </div>
+
+         </div> : 
+      
+         <div className="logo">
+
+         <img src={logo} alt="logo" />
+         <h1>Food Explorer</h1>
+         </div>
+         }
+
+        <Input id="searchDesktop" type="text" placeholder="Search for dishes or ingredients" icon={FiSearch} />
+
+        { admin ? <Button className="ButtonNewDish" name="New Dish"/> : <ButtonRequest/>}
+
+        <button type="button" className="exit" > <GoSignOut/></button>
+
+      </div>
 
     </Container>
   )
