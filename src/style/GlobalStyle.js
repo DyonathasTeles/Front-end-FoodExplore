@@ -21,7 +21,7 @@ export default createGlobalStyle`
 
   ::-webkit-scrollbar{
     background-color: ${({ theme }) => theme.COLORS.DARK_200};
-    width: 1rem;
+    width: .7rem;
     border-radius: .5rem;
   }
 

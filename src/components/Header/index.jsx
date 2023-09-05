@@ -1,19 +1,25 @@
-import { Container } from "./style";
+import { Container } from './style'
 
-import { ButtonRequest } from "../ButtonRequest";
-import { Input } from "../../components/Input"
-import { Button } from "../Button";
-import { Sidebar } from "../Sidebar";
+import { Input } from '../../components/Input'
+import { Button } from '../Button'
+import { ButtonRequest } from '../ButtonRequest'
+import { Sidebar } from '../Sidebar'
 
-import {FiSearch, FiMenu} from "react-icons/fi"
-import { PiReceiptBold } from "react-icons/pi"
-import {GoSignOut} from "react-icons/go"
+import { FiMenu, FiSearch } from 'react-icons/fi'
+import { GoSignOut } from 'react-icons/go'
+import { PiReceiptBold } from 'react-icons/pi'
 
-import logo from "../../assets/logo.svg" 
-import { useState } from "react";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import logo from '../../assets/logo.svg'
 
-export function Header({admin=false, ...rest}) {
+export function Header({ admin = false, ...rest }) {
   const [sidebar, setSidebar] = useState(false)
+  const navigate = useNavigate()
+
+  function navigationHome() {
+    return navigate('/')
+  }
 
   function showSidebar() {
     return setSidebar(!sidebar)
@@ -21,72 +27,72 @@ export function Header({admin=false, ...rest}) {
 
   return (
     <Container $admin={admin} {...rest}>
-
       <div className="Mobile ">
-
-      <div className="frame">
+        <div className="frame">
           <FiMenu onClick={showSidebar} />
-          {sidebar && <Sidebar admin={true} active={setSidebar} />}
-      </div>
+          {sidebar && <Sidebar active={setSidebar} />}
+        </div>
 
-      
-        { admin ?  
-          
-        <div className="logo">
-         <img src={logo} alt="logo" />
-         <h1>Food Explorer</h1>
+        {admin ? (
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <h1 onClick={navigationHome}>Food Explorer</h1>
 
-         <div className="adm">
-          <span>admin</span>
-         </div>
+            <div className="adm">
+              <span>admin</span>
+            </div>
+          </div>
+        ) : (
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <h1 onClick={navigationHome}>Food Explorer</h1>
+          </div>
+        )}
 
-         </div> : 
-      
-         <div className="logo">
-
-         <img src={logo} alt="logo" />
-         <h1>Food Explorer</h1>
-         </div>
-         }
-
-        { admin ? '' :  
-        
-        <button className="receipt"> 
-         <PiReceiptBold/>
-         <div className="orderNumbers"> 12 </div>
-         </button>}
-
+        {admin ? (
+          ''
+        ) : (
+          <button className="receipt">
+            <PiReceiptBold />
+            <div className="orderNumbers"> 12 </div>
+          </button>
+        )}
       </div>
 
       <div className="Desktop">
+        {admin ? (
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <h1 onClick={navigationHome}>Food Explorer</h1>
 
-      { admin ?  
-        
-        <div className="logo">
-         <img src={logo} alt="logo" />
-         <h1>Food Explorer</h1>
+            <div className="adm">
+              <span>admin</span>
+            </div>
+          </div>
+        ) : (
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <h1 onClick={navigationHome}>Food Explorer</h1>
+          </div>
+        )}
 
-         <div className="adm">
-          <span>admin</span>
-         </div>
+        <Input
+          id="searchDesktop"
+          type="text"
+          placeholder="Search for dishes or ingredients"
+          icon={FiSearch}
+        />
 
-         </div> : 
-      
-         <div className="logo">
+        {admin ? (
+          <Button className="ButtonNewDish" name="New Dish" />
+        ) : (
+          <ButtonRequest />
+        )}
 
-         <img src={logo} alt="logo" />
-         <h1>Food Explorer</h1>
-         </div>
-         }
-
-        <Input id="searchDesktop" type="text" placeholder="Search for dishes or ingredients" icon={FiSearch} />
-
-        { admin ? <Button className="ButtonNewDish" name="New Dish"/> : <ButtonRequest/>}
-
-        <button type="button" className="exit" > <GoSignOut/></button>
-
+        <button type="button" className="exit">
+          <GoSignOut />
+        </button>
       </div>
-
     </Container>
   )
 }

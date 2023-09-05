@@ -1,29 +1,28 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 210px;
   min-height: 29.2rem;
   padding: 2.4rem;
-  background-color: ${({theme}) => theme.COLORS.DARK_200};
-  border: 1px solid ${({theme}) => theme.COLORS.DARK_300};
-  border-radius: .8rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_200};
+  border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
+  border-radius: 0.8rem;
   position: relative;
 
-
-
+  display: grid;
 `
-export const Content =styled.div`
+export const Content = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex: none;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  
-  
+
   .pencil {
     background-color: transparent;
-    color: ${({theme}) => theme.COLORS.LIGHT_300};
+    color: ${({ theme }) => theme.COLORS.LIGHT_300};
     font-size: 2.4rem;
     border: none;
 
@@ -52,25 +51,25 @@ export const Content =styled.div`
 
     margin: 1.2rem 0;
 
-    >h2 {
-      font-family: "Poppins", sans-serif;
+    > h2 {
+      font-family: 'Poppins', sans-serif;
       font-weight: 500;
       font-size: 1.4rem;
       line-height: 2.4rem;
     }
-  
+
     p {
       display: none;
     }
-  
-    span{
-      font-family: "Roboto", sans-serif;
+
+    span {
+      font-family: 'Roboto', sans-serif;
       font-size: 1.6rem;
       line-height: 100%;
     }
   }
 
-  .buttonInclude{
+  .buttonInclude {
     margin-top: 20px;
     width: 100%;
   }
@@ -111,7 +110,7 @@ export const Heart = styled.label`
     transition: 100ms;
     animation: dislike_effect 400ms ease;
 
-    >svg {
+    > svg {
       font-size: 2.2rem;
     }
   }

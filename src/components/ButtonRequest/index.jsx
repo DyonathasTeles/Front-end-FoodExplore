@@ -1,13 +1,12 @@
-import { Container } from "./style"
+import { Container } from './style'
 
-import { PiReceiptBold } from "react-icons/pi"
+import { PiReceiptBold } from 'react-icons/pi'
 
-export function ButtonRequest({name, icon: Icon, ...rest}) {
-  
+export function ButtonRequest({ ...rest }) {
   return (
-    <Container>
-      <PiReceiptBold/>
-      <p>Requests (0)</p>
+    <Container {...rest}>
+      <PiReceiptBold />
+      <p>Orders (0)</p>
     </Container>
   )
 }

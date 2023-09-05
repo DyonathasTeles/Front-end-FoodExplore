@@ -1,56 +1,64 @@
-import { Container, Content, Heart } from "./style";
-import { Amount } from "../Amount"
-import { Button } from "../Button"
+import { Amount } from '../Amount'
+import { Button } from '../Button'
+import { Container, Content, Heart } from './style'
 
-import {FiHeart} from "react-icons/fi"
-import { BsPencil } from "react-icons/bs"
-import img from "../../assets/Maskgroup.png"
+import { BsPencil } from 'react-icons/bs'
+import { FiHeart } from 'react-icons/fi'
+import img from '../../assets/Maskgroup.png'
 
-import { useState } from "react";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-
-export function Card({data, admin=true, ...rest}) {
-
+export function Card({ data, admin = true, ...rest }) {
   const [like, setLike] = useState(false)
+  const navigate = useNavigate()
 
-  function handleMenuOpen(open) {
+  function navigationDishPreview() {
+    return navigate(`/dish/1`)
+  }
+
+  function navigationToEditDish() {
+    return navigate(`/edit/1`)
+  }
+
+  function handleMenuOpen() {
     setLike(!like)
   }
 
   return (
     <Container>
-      <Content>
-        {admin ? 
-        <BsPencil className="pencil" />
-         :
-        <Heart>
-          <input type="checkbox" onChange={handleMenuOpen} /> 
-          <div className="checkmark">
-          <FiHeart/>
-          </div>
-        </Heart>
-        }
+      <Content {...rest}>
+        {admin ? (
+          <BsPencil onClick={navigationToEditDish} className="pencil" />
+        ) : (
+          <Heart>
+            <input type="checkbox" onChange={handleMenuOpen} />
+            <div className="checkmark">
+              <FiHeart />
+            </div>
+          </Heart>
+        )}
 
-        <img src={img} alt="" />
-        
+        <img onClick={navigationDishPreview} src={img} alt="" />
+
         <div className="cardTexts">
-        <h2> Ravanello Salad  </h2>        
+          <h2 onClick={navigationDishPreview}> Ravanello Salad </h2>
 
-        <p>uma salada cheia de guloseimas</p>
+          <p onClick={navigationDishPreview}>uma salada cheia de guloseimas</p>
 
-        <span>R$ 49,97 </span>
+          <span>R$ 49,97 </span>
         </div>
 
-        {admin ?
-        <></> : 
-        <>
-        <Amount />
-        <div className="buttonInclude">
-        <Button name="include" />
-        </div>
-        </>
-      
-        }
+        {admin ? (
+          <></>
+        ) : (
+          <>
+            <Amount />
+            <div className="buttonInclude">
+              <Button name="include" />
+            </div>
+          </>
+        )}
       </Content>
     </Container>
   )

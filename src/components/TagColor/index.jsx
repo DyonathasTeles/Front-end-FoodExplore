@@ -1,15 +1,16 @@
-import { Container } from "./style";
-import { FiPlus, FiX } from "react-icons/fi" 
+import { FiPlus, FiX } from 'react-icons/fi'
+import { Container } from './style'
 
-export function TagColor({ isNew, value, onClick, ...rest}) {
+export function TagColor({ isNew, value, onClick, ...rest }) {
   return (
-  <Container $isNew={isNew}>
-    <div className="content">
+    <Container $isNew={isNew}>
+      <div className="content">
+        <input type="text" value={value} readOnly={!isNew} {...rest} />
 
-    <input type="text" value={value} readOnly={!isNew} {...rest}  />
-
-    <button type="button" onClick={onClick} >{ isNew ? <FiPlus/> : <FiX/> }</button>
-    </div>
-  </Container>
+        <button type="button" onClick={onClick}>
+          {isNew ? <FiPlus /> : <FiX />}
+        </button>
+      </div>
+    </Container>
   )
 }
