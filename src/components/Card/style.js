@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 210px;
-  min-height: 29.2rem;
+  width: clamp(21rem, 17.8rem + 8.7037vw, 30.4rem);
+  min-height: clamp(29.2rem, 25.4rem + 10.5556vw, 46.2rem);
   padding: 2.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
   border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
@@ -39,8 +39,8 @@ export const Content = styled.div`
   }
 
   img {
-    width: 8.8rem;
-    height: 8.8rem;
+    width: clamp(8.8rem, 5.6rem + 8.7475vw, 17.6rem);
+    height: clamp(8.8rem, 5.6rem + 8.7475vw, 17.6rem);
   }
 
   .cardTexts {
@@ -54,30 +54,48 @@ export const Content = styled.div`
     > h2 {
       font-family: 'Poppins', sans-serif;
       font-weight: 500;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
+      font-size: clamp(1.6rem, 1rem + 0.994vw, 2.4rem);
+      line-height: clamp(2.4rem, 2rem + 0.9543vw, 3.3rem);
     }
 
     p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 160%;
       display: none;
     }
 
     span {
       font-family: 'Roboto', sans-serif;
-      font-size: 1.6rem;
+      font-size: clamp(1.6rem, 1rem + 1.5905vw, 3.6rem);
       line-height: 100%;
+      color: ${({ theme }) => theme.COLORS.BLUE_200};
     }
   }
+  .quantityAndOrder {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
 
-  .buttonInclude {
-    margin-top: 20px;
-    width: 100%;
+  @media (min-width: 820px) {
+    .quantityAndOrder {
+      flex-direction: row;
+      margin-top: 1.1rem;
+    }
+
+    .cardTexts {
+      p {
+        display: block;
+      }
+    }
   }
 `
 export const Heart = styled.label`
   display: block;
   position: absolute;
-  right: 3rem;
+  right: 2rem;
   top: 1rem;
 
   cursor: pointer;
@@ -105,8 +123,8 @@ export const Heart = styled.label`
   .checkmark {
     top: 0;
     left: 0;
-    height: 1.3rem;
-    width: 1.3rem;
+    height: 2.2rem;
+    width: 2.2rem;
     transition: 100ms;
     animation: dislike_effect 400ms ease;
 

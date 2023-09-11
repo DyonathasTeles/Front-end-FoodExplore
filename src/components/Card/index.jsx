@@ -9,7 +9,7 @@ import img from '../../assets/Maskgroup.png'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function Card({ data, admin = true, ...rest }) {
+export function Card({ data, admin = false, ...rest }) {
   const [like, setLike] = useState(false)
   const navigate = useNavigate()
 
@@ -52,12 +52,10 @@ export function Card({ data, admin = true, ...rest }) {
         {admin ? (
           <></>
         ) : (
-          <>
+          <div className="quantityAndOrder">
             <Amount />
-            <div className="buttonInclude">
-              <Button name="include" />
-            </div>
-          </>
+            <Button name="include" />
+          </div>
         )}
       </Content>
     </Container>

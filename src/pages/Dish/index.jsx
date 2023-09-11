@@ -9,8 +9,14 @@ import { Container, Content } from './style'
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md'
 import { PiReceiptBold } from 'react-icons/pi'
 import dish from '../../assets/Maskgroup-2.png'
+import { useNavigate } from 'react-router-dom'
 
 export function Dish() {
+  const navigate = useNavigate()
+
+  function navigationHome() {
+    return navigate(-1)
+  }
   return (
     <Container>
       <Header className="mobile" />
@@ -20,6 +26,7 @@ export function Dish() {
           className="buttonCard"
           icon={MdOutlineKeyboardArrowLeft}
           name="Back"
+          onClick={navigationHome}
         />
 
         <div className="product">

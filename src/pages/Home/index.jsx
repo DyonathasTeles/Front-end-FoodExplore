@@ -13,30 +13,18 @@ export function Home() {
     new Splide('.splide', {
       pagination: false,
       autoWidth: true,
-      gap: '10px',
-      padding: {
-        left: '2.4rem',
-      },
       focus: 'left',
     }).mount()
 
     new Splide('#slide2', {
       pagination: false,
       autoWidth: true,
-      gap: '10px',
-      padding: {
-        left: '2.4rem',
-      },
       focus: 'left',
     }).mount()
 
     new Splide('#slide3', {
       pagination: false,
       autoWidth: true,
-      gap: '10px',
-      padding: {
-        left: '2.4rem',
-      },
       focus: 'left',
     }).mount()
   }, [])
