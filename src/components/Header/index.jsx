@@ -12,8 +12,11 @@ import { PiReceiptBold } from 'react-icons/pi'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
+import { useAuth } from '../../hooks/auth'
 
-export function Header({ admin = false, ...rest }) {
+export function Header({ onChange, ...rest }) {
+  const { signOut, user } = useAuth()
+
   const [sidebar, setSidebar] = useState(false)
   const navigate = useNavigate()
 
@@ -21,19 +24,25 @@ export function Header({ admin = false, ...rest }) {
     return navigate('/')
   }
 
+  function navigationNewDish() {
+    return navigate('/new')
+  }
+
   function showSidebar() {
     return setSidebar(!sidebar)
   }
 
+  const isAdmin = user.role === 'admin'
+
   return (
-    <Container $admin={admin} {...rest}>
+    <Container $admin={isAdmin} {...rest}>
       <div className="Mobile ">
         <div className="frame">
           <FiMenu onClick={showSidebar} />
           {sidebar && <Sidebar active={setSidebar} />}
         </div>
 
-        {admin ? (
+        {isAdmin ? (
           <div className="logo">
             <img src={logo} alt="logo" />
             <h1 onClick={navigationHome}>Food Explorer</h1>
@@ -49,18 +58,18 @@ export function Header({ admin = false, ...rest }) {
           </div>
         )}
 
-        {admin ? (
+        {isAdmin ? (
           ''
         ) : (
           <button className="receipt">
             <PiReceiptBold />
-            <div className="orderNumbers"> 12 </div>
+            <div className="orderNumbers"> 0 </div>
           </button>
         )}
       </div>
 
       <div className="Desktop">
-        {admin ? (
+        {isAdmin ? (
           <div className="logo">
             <img src={logo} alt="logo" />
             <h1 onClick={navigationHome}>Food Explorer</h1>
@@ -81,15 +90,20 @@ export function Header({ admin = false, ...rest }) {
           type="text"
           placeholder="Search for dishes or ingredients"
           icon={FiSearch}
+          onChange={onChange}
         />
 
-        {admin ? (
-          <Button className="ButtonNewDish" name="New Dish" />
+        {isAdmin ? (
+          <Button
+            onClick={navigationNewDish}
+            className="ButtonNewDish"
+            name="New Dish"
+          />
         ) : (
           <ButtonRequest />
         )}
 
-        <button type="button" className="exit">
+        <button type="button" className="exit" onClick={signOut}>
           <GoSignOut />
         </button>
       </div>

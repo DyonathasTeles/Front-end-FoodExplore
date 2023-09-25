@@ -7,20 +7,113 @@ import { InputImg } from '../../components/InputImg'
 import { Textarea } from '../../components/Textarea'
 import { Container, Content, Form } from './style'
 
+import { useEffect, useState } from 'react'
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { TagColor } from '../../components/TagColor'
-import { useNavigate } from 'react-router-dom'
+import { api } from '../../services/api'
 
 export function EditDish() {
+  const params = useParams()
   const navigate = useNavigate()
 
-  function navigationHome() {
-    return navigate(-1)
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState(0)
+  const [category, setCategory] = useState('')
+
+  const [tags, setTags] = useState([])
+  const [newTag, setNewTags] = useState('')
+
+  const [avatarFile, setAvatarFile] = useState(null)
+
+  async function updateDish({ dish, avatarFile }) {
+    try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData()
+        fileUploadForm.append('avatar', avatarFile)
+
+        const response = await api.patch(
+          `/dishes/avatar/${params.id}`,
+          fileUploadForm,
+        )
+        dish.avatar = response.data.avatar
+      }
+
+      await api.put(`/dishes/${params.id}`, dish)
+
+      alert('dish updated successfully')
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('unable to update dish')
+      }
+    }
   }
+
+  async function handleUpdated() {
+    const dish = {
+      name,
+      description,
+      price,
+      tags,
+      category,
+    }
+
+    await updateDish({ dish, avatarFile })
+  }
+
+  function handleChangeAvatar(event) {
+    const files = event.target.files[0]
+    setAvatarFile(files)
+  }
+
+  function handleAddTag() {
+    setTags((prevState) => [...prevState, newTag])
+    setNewTags('')
+  }
+
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted))
+  }
+
+  async function handleDeleteDish() {
+    const confirm = window.confirm('Are you sure you want to delete the dish?')
+
+    if (!confirm) {
+      return
+    }
+
+    try {
+      await api.delete(`/dishes/${params.id}`)
+      toast.success('dish deleted')
+      navigate('/')
+    } catch (error) {
+      toast.error(error)
+    }
+  }
+
+  function navigationHome() {
+    return navigate('/')
+  }
+
+  useEffect(() => {
+    async function showDish() {
+      const response = await api.get(`/dishes/${params.id}`)
+      setName(response.data.name)
+      setDescription(response.data.description)
+      setPrice(response.data.price)
+      setTags(response.data.tags.map((tag) => tag.name))
+      setCategory(response.data.category)
+    }
+
+    showDish()
+  }, [params.id])
   return (
     <Container>
       <Header />
-
       <Content>
         <Form>
           <div className="return">
@@ -36,20 +129,28 @@ export function EditDish() {
           <div className="container1">
             <div className="img-dish">
               <p>Dish image</p>
-              <InputImg />
+              <InputImg onChange={handleChangeAvatar} />
             </div>
 
             <div className="name-dish">
               <p>Dish name</p>
-              <Input cor type="text" placeholder="Example: Caesar Salad" />
+              <Input
+                cor
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
 
             <div className="Category">
               <p>Category</p>
-              <select name="" id="">
-                <option value="">Meals</option>
-                <option value="">Main dishes</option>
-                <option value="">Drinks</option>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="Meals">Meals</option>
+                <option value="Main dishes">Main dishes</option>
+                <option value="Drinks">Drinks</option>
               </select>
             </div>
           </div>
@@ -59,25 +160,46 @@ export function EditDish() {
               <p>Ingredients</p>
 
               <div className="tag-ingredients">
-                <TagColor value="tomate" />
-                <TagColor isNew={true} />
+                {tags.map((tag, index) => (
+                  <TagColor
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => {
+                      handleRemoveTag(tag)
+                    }}
+                  />
+                ))}
+                <TagColor
+                  placeholder="new tag"
+                  isNew={true}
+                  onChange={(e) => setNewTags(e.target.value)}
+                  value={newTag}
+                  onClick={handleAddTag}
+                />
               </div>
             </div>
 
             <div className="Prices">
               <p>Price</p>
-              <Input type="number" placeholder="R$ 00,00" />
+              <Input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
             </div>
           </div>
 
           <div className="Description">
             <p>Description</p>
-            <Textarea placeholder="Briefly talk about the dish, its ingredients and composition" />
+            <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
 
           <div className="buttons">
-            <Button dark name="Delete dish" />
-            <Button name="Save editions" />
+            <Button dark name="Delete dish" onClick={handleDeleteDish} />
+            <Button name="Save editions" onClick={handleUpdated} />
           </div>
         </Form>
       </Content>

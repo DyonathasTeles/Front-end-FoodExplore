@@ -1,14 +1,19 @@
 import Splide from '@splidejs/splide'
 import '@splidejs/splide/css/skyblue'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import fruit from '../../assets/pngegg2.png'
 import { Card } from '../../components/Card'
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
+import { api } from '../../services/api'
 import { Container, Content } from './style'
 
 export function Home() {
+  const [search, setSearch] = useState('')
+  const [dishes, setDishes] = useState([])
+  const [favorites, setFavorites] = useState([])
+
   useEffect(() => {
     new Splide('.splide', {
       pagination: false,
@@ -27,11 +32,29 @@ export function Home() {
       autoWidth: true,
       focus: 'left',
     }).mount()
-  }, [])
+  }, [dishes])
+
+  useEffect(() => {
+    async function fetchDishes() {
+      try {
+        const response = await api.get(`/dishes?search=${search}`)
+        setDishes(response.data)
+        const { data } = await api.get('/favorites')
+        if (data.length) {
+          const favoritesFilter = data.map((item) => item.id)
+          setFavorites(favoritesFilter)
+        }
+      } catch {
+        alert('error')
+      }
+    }
+
+    fetchDishes()
+  }, [search])
 
   return (
     <Container>
-      <Header />
+      <Header onChange={(e) => setSearch(e.target.value)} />
 
       <Content>
         <div className="description">
@@ -56,27 +79,17 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
+                {dishes
+                  .filter((item) => item.category === 'Meals')
+                  .map((dish) => (
+                    <li key={String(dish.id)} className="splide__slide">
+                      <Card
+                        data={dish}
+                        id={dish.id}
+                        isFavorite={favorites.includes(dish.id)}
+                      />
+                    </li>
+                  ))}
               </ul>
             </div>
           </section>
@@ -99,27 +112,17 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
+                {dishes
+                  .filter((item) => item.category === 'Main dishes')
+                  .map((dish) => (
+                    <li key={String(dish.id)} className="splide__slide">
+                      <Card
+                        data={dish}
+                        id={dish.id}
+                        isFavorite={favorites.includes(dish.id)}
+                      />
+                    </li>
+                  ))}
               </ul>
             </div>
           </section>
@@ -142,27 +145,17 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
-                <li className="splide__slide">
-                  <Card />
-                </li>
+                {dishes
+                  .filter((item) => item.category === 'Drinks')
+                  .map((dish) => (
+                    <li key={String(dish.id)} className="splide__slide">
+                      <Card
+                        data={dish}
+                        id={dish.id}
+                        isFavorite={favorites.includes(dish.id)}
+                      />
+                    </li>
+                  ))}
               </ul>
             </div>
           </section>

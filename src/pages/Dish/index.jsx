@@ -6,73 +6,89 @@ import { Header } from '../../components/Header'
 import { Tag } from '../../components/Tag'
 import { Container, Content } from './style'
 
+import { useEffect, useState } from 'react'
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md'
 import { PiReceiptBold } from 'react-icons/pi'
-import dish from '../../assets/Maskgroup-2.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { api } from '../../services/api'
+import { PriceFormater } from '../../utils/price'
 
 export function Dish() {
   const navigate = useNavigate()
+  const params = useParams()
+
+  const [data, setData] = useState(null)
+  const [avatarName, setAvatarName] = useState('')
+
+  const avatarUrl = `${api.defaults.baseURL}/files/${avatarName}`
 
   function navigationHome() {
     return navigate(-1)
   }
+
+  useEffect(() => {
+    async function fetchDish() {
+      const response = await api.get(`/dishes/${params.id}`)
+      setData(response.data)
+      setAvatarName(response.data.avatar)
+    }
+
+    fetchDish()
+  }, [params.id])
+
   return (
     <Container>
-      <Header className="mobile" />
+      <Header />
+      {data && (
+        <Content>
+          <ButtonText
+            className="buttonCard"
+            icon={MdOutlineKeyboardArrowLeft}
+            name="Back"
+            onClick={navigationHome}
+          />
 
-      <Content>
-        <ButtonText
-          className="buttonCard"
-          icon={MdOutlineKeyboardArrowLeft}
-          name="Back"
-          onClick={navigationHome}
-        />
+          <div className="product">
+            <div className="img-dish">
+              <img src={avatarUrl} alt={data.name} />
+            </div>
 
-        <div className="product">
-          <div className="img-dish">
-            <img src={dish} alt="" />
-          </div>
+            <div className="information">
+              <div className="details">
+                <h2>{data.name}</h2>
+                <p>{data.description}</p>
 
-          <div className="information">
-            <div className="details">
-              <h2>Salad Ravanello</h2>
-              <p>
-                Radishes, green leaves and sweet and sour sauce sprinkled with
-                sesame seeds.
-              </p>
+                {data.tags && (
+                  <div className="tags">
+                    {data.tags.map((tag) => (
+                      <Tag key={String(tag.id)} title={tag.name} />
+                    ))}
+                  </div>
+                )}
+              </div>
 
-              <div className="tags">
-                <Tag title="pão" />
-                <Tag title="tomate" />
-                <Tag title="cebola" />
-                <Tag title="macarrão" />
-                <Tag title="pepino" />
-                <Tag title="abacaxi" />
+              <div className="purchase-amount">
+                <Amount />
+
+                {window.innerWidth > 820 ? (
+                  <Button
+                    className="ButtonOrder"
+                    name={`include ∙ ${PriceFormater(data.price)}`}
+                    loading
+                  />
+                ) : (
+                  <Button
+                    className="ButtonOrder"
+                    name={`order ∙ ${PriceFormater(data.price)}`}
+                    icon={PiReceiptBold}
+                    loading
+                  />
+                )}
               </div>
             </div>
-
-            <div className="purchase-amount">
-              <Amount />
-
-              {window.innerWidth > 820 ? (
-                <Button
-                  className="ButtonOrder"
-                  name="include ∙ R$ 25,00"
-                  loading
-                />
-              ) : (
-                <Button
-                  className="ButtonOrder"
-                  name="order ∙ R$ 25,00"
-                  icon={PiReceiptBold}
-                  loading
-                />
-              )}
-            </div>
           </div>
-        </div>
-      </Content>
+        </Content>
+      )}
       <Footer />
     </Container>
   )

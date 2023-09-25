@@ -1,11 +1,9 @@
-import { Container, Content } from "./style";
+import { Container, Content } from './style'
 
-export function Textarea({value,...rest}) {
-  return(
+export function Textarea({ value, ...rest }) {
+  return (
     <Container>
-      <Content {...rest}> 
-      {value}
-      </Content>
+      <Content {...rest} value={value} />
     </Container>
   )
 }
